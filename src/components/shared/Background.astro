@@ -1,6 +1,7 @@
 <div class="star-bg">
+  <div class="grid-overlay"></div>
+  <div class="mouse-glow"></div>
   <div class="stars"></div>
-
   <div class="shooting-star"></div>
   <div class="shooting-star"></div>
   <div class="shooting-star"></div>
@@ -16,17 +17,39 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0b0b2b, #1b2735 70%, #090a0f);
+  background: linear-gradient(to bottom, #08081e, #0f1629 60%, #070a12);
 }
 
-.star-bg{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
+.star-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.mouse-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.07),
+    transparent 60%
+  );
+  transition: background 0.15s ease;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }
 .stars {
   width: 1px;

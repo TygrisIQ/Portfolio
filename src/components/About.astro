@@ -4,18 +4,18 @@ import SkillCard from "./elements/SkillCard.astro"
 ---
 
 <section id="about">
-  <PageHeader title="About Me" number="2."/>
+  <PageHeader title="About Me" number="01."/>
 
-  <div class="about-grid">
+  <div class="about-grid" data-reveal>
     <div class="about-text">
       <p>
-        I'm a <span class="highlight">Software Development student at SAIT</span>, graduating soon with a focus on systems programming, backend architecture, and graphics. I gravitate toward problems that require understanding what's happening at a low level — memory, performance, and correctness.
+        I'm a <span class="highlight">Software Development student at SAIT</span> graduating in 2026, focused on systems programming, backend architecture, and graphics. I'm drawn to problems that demand understanding what's happening at the machine level including memory, performance, correctness.
       </p>
       <p>
-        I built a <span class="highlight">3D rendering engine from scratch in Rust</span> using raw OpenGL, no game engine, no shortcuts. That project taught me more about software architecture, memory management, and debugging than anything else. I also built Playport, a real-time virtual joystick system using Linux's Uinput kernel interface over <span class="highlight">TCP/UDP</span>.
+        I built a <span class="highlight">3D rendering engine from scratch in Rust</span> using raw OpenGL with no game engine, no shortcuts. It taught me more about software architecture, memory management, and debugging than anything else. I also built Playport, a real-time virtual joystick system that injects controller input into the <span class="highlight">Linux kernel via Uinput</span> over TCP/UDP, with an Android companion app written in Kotlin.
       </p>
       <p>
-        I write code that I'd be comfortable maintaining two years from now. I care about <span class="highlight">correctness, scalability, and intent</span> — not just making it work.
+        I write code I'd be comfortable maintaining two years from now. I care about <span class="highlight">correctness, scalability, and intent</span> not just making it work.
       </p>
 
       <div class="skills-section">
@@ -53,9 +53,13 @@ import SkillCard from "./elements/SkillCard.astro"
       </div>
 
       <div class="skills-section">
-        <p class="skills-label">// tools</p>
+        <p class="skills-label">// tools & environment</p>
         <div class="skills-grid">
           <SkillCard name="Git"    color="#f05032" />
+          <SkillCard name="Docker" color="#2496ed" />
+          <SkillCard name="CMake"  color="#064f8c" />
+          <SkillCard name="Neovim" color="#57a143" />
+          <SkillCard name="Bash"   color="#4eaa25" />
         </div>
       </div>
     </div>
@@ -71,11 +75,15 @@ import SkillCard from "./elements/SkillCard.astro"
       </div>
       <div class="stat-card">
         <span class="stat-number">∞</span>
-        <span class="stat-label">Bugs fixed</span>
+        <span class="stat-label">Bugs debugged</span>
       </div>
       <div class="stat-card accent">
         <span class="stat-number">2026</span>
-        <span class="stat-label">Graduating SAIT</span>
+        <span class="stat-label">SAIT graduate</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">YYC</span>
+        <span class="stat-label">Calgary, AB</span>
       </div>
     </div>
   </div>

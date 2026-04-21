@@ -3,6 +3,32 @@ import StatusBadge from "./elements/StatusBadge.astro"
 import TerminalTypewriter from "./elements/TerminalTypewriter.astro"
 import HeroCTA from "./elements/HeroCTA.astro"
 
+const codeSnippet = [
+  '<span class="cm">// 3D renderer — no shortcuts</span>',
+  '<span class="kw">use</span> glow::<span class="ty">Context</span>;',
+  '',
+  '<span class="kw">pub struct</span> <span class="ty">Renderer</span> {',
+  '    gl: <span class="ty">Context</span>,',
+  '    scene: <span class="ty">Scene</span>,',
+  '    camera: <span class="ty">Camera</span>,',
+  '}',
+  '',
+  '<span class="kw">impl</span> <span class="ty">Renderer</span> {',
+  '    <span class="kw">pub fn</span> <span class="fn-name">draw</span>(&<span class="kw">mut</span> self) {',
+  '        <span class="kw">unsafe</span> {',
+  '            self.gl.<span class="fn-name">clear</span>(',
+  '                COLOR_BUFFER_BIT',
+  '                    | DEPTH_BUFFER_BIT,',
+  '            );',
+  '            self.scene.<span class="fn-name">render</span>(',
+  '                &amp;self.gl,',
+  '                &amp;self.camera,',
+  '            );',
+  '        }',
+  '    }',
+  '}',
+].join('\n');
+
 const phrases = [
   "I design highly scalable database schemas.",
   "I enforce strict clean architecture.",
@@ -14,15 +40,16 @@ const phrases = [
 ---
 
 <section id="hero">
-  <div class="hero-content">
+  <div class="hero-left">
     <StatusBadge text="Available Now" />
     <h1 class="name">
       Youssif<br />
-      <span class="last-name">Akkad.</span>
+      <span class="last-name">Al-Halawche.</span>
     </h1>
     <TerminalTypewriter phrases={phrases} path="~/portfolio" branch="main" />
     <p class="subtitle">
-      Developer experienced in backend development, REST APIs, and Linux-based tooling.
+      Developer focused on systems programming, backend architecture, and graphics.
+      I care deeply about what happens under the hood.
     </p>
     <HeroCTA
       primaryText="View Projects"
@@ -34,25 +61,40 @@ const phrases = [
       thirdHref="#contact"
     />
   </div>
+
+  <div class="hero-right" aria-hidden="true">
+    <div class="code-window">
+      <div class="code-header">
+        <div class="code-dots">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+        </div>
+        <span class="code-filename">euphrates/renderer.rs</span>
+      </div>
+      <pre class="code-body"><code set:html={codeSnippet} /></pre>
+    </div>
+  </div>
 </section>
 
 <style>
 section {
   min-height: 100vh;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 400px;
   align-items: center;
+  gap: 4rem;
   padding-top: 5rem;
   scroll-margin-top: 5rem;
 }
-.hero-content {
+.hero-left {
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  max-width: 800px;
   width: 100%;
 }
 .name {
-  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  font-size: clamp(2.6rem, 6vw, 5rem);
   font-weight: 800;
   color: #f8fafc;
   margin: 0;
@@ -62,17 +104,102 @@ section {
 .last-name {
   color: transparent;
   -webkit-text-stroke: 1.5px #94a3b8;
+  background: linear-gradient(135deg, #64ffda, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 0;
 }
 .subtitle {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #64748b;
-  max-width: 580px;
-  line-height: 1.75;
+  max-width: 520px;
+  line-height: 1.8;
   margin: 0;
+}
+
+/* Code window */
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-right::before {
+  content: '';
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(100,255,218,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.code-window {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 10px;
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(100,255,218,0.05);
+  animation: float 7s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.code-header {
+  background: #161b22;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.code-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.dot-r, .dot-y, .dot-g {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dot-r { background: #ff5f57; }
+.dot-y { background: #febc2e; }
+.dot-g { background: #28c840; }
+.code-filename {
+  margin-left: 0.5rem;
+  color: #8b949e;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+}
+.code-body {
+  margin: 0;
+  padding: 1.2rem 1.4rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.code-body code {
+  color: #c9d1d9;
+}
+.kw   { color: #ff7b72; }
+.ty   { color: #79c0ff; }
+.fn-name { color: #d2a8ff; }
+.cm   { color: #8b949e; }
+
+@media (max-width: 900px) {
+  section {
+    grid-template-columns: 1fr;
+  }
+  .hero-right { display: none; }
 }
 @media (max-width: 600px) {
   section { padding-top: 5rem; align-items: flex-start; padding-bottom: 3rem; min-height: 100svh; }
-  .hero-content { gap: 1.1rem; }
-  .subtitle { font-size: 0.9rem; line-height: 1.7; }
+  .hero-left { gap: 1.2rem; }
+  .subtitle { font-size: 0.9rem; line-height: 1.75; }
 }
 </style>

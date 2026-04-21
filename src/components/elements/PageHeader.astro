@@ -16,27 +16,28 @@ const { title, number } = Astro.props;
 .page-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.8rem;
   width: 100%;
   margin-bottom: 3rem;
 }
 .number {
   color: #64ffda;
-  font-weight: bold;
-  font-family: monospace;
+  font-weight: 600;
+  font-family: 'Fira Code', monospace;
   white-space: nowrap;
-  font-size: xx-large;
+  font-size: 1rem;
+  opacity: 0.75;
 }
 .title {
-  color: #ccd6f6;
-  font-weight: bold;
-  font-size:xx-large;
-  font-family: monospace;
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 .line {
   flex: 1;
   height: 1px;
-  background-color: rgba(255,255,255,0.15);
+  background: linear-gradient(to right, rgba(100,255,218,0.2), rgba(255,255,255,0.04));
 }
 </style>
