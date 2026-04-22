@@ -1,3 +1,6 @@
-## My personal portfolio
+# My personal portfolio
 
-(VISIT)[https://tygrisiq.github.io/Youssif-Halawche/]
+
+## VISIT
+
+https://tygrisiq.github.io/Youssif-Halawche/
